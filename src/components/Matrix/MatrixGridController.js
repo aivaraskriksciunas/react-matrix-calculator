@@ -73,6 +73,13 @@ export default class MatrixGridController extends React.Component {
         }
     }
 
+    selectCellText( htmlElement ) {
+        let range = document.createRange()
+        range.selectNodeContents( htmlElement )
+        let selection = window.getSelection()
+        selection.removeAllRanges()
+        selection.addRange( range )
+    }
 
     createMatrixRow( row, rowIndex ) {
         if ( !this.readonly ) {
@@ -82,7 +89,8 @@ export default class MatrixGridController extends React.Component {
                         <ContentEditable
                             html={col.toString()}
                             onChange={( ev ) => this.setMatrixValue( ev, rowIndex, colIndex )}
-                            onBlur={( ev ) => this.parseMatrixValue( rowIndex, colIndex )}
+                            onFocus={( ev ) => this.selectCellText( ev.target )}
+                            onBlur={() => this.parseMatrixValue( rowIndex, colIndex )}
                             className={styles.matrixInput}
                             ></ContentEditable>
                     </td>
