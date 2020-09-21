@@ -10,3 +10,15 @@ body {
   background-color: #EEEEEE;
   min-height: 100vh;
 }
+
+
+.content {
+  min-height: 100vh;
+}
+
+.footer {
+  width: 100%;
+  padding: 15px;
+  background-color: #CFD8DC;
+  color: #546E7A;
+}
