@@ -1,0 +1,54 @@
+
+.matrixInput {
+    border: none;
+    border-radius: 0;
+    background-color: white;
+    color: #424242;
+    border: 1px solid #BDBDBD;
+    box-shadow: 1px 1px 0 #BDBDBD;
+
+    padding: 8px 15px;
+    margin: 0 8px 8px 0;
+    max-width: 100px;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+
+    font-size: 18px;
+    
+}
+
+.matrixInput:focus {
+    border: 1px solid #00897B;
+    box-shadow: 1px 1px 0 #00897B;
+    outline: none;
+}
+
+.matrixInput::-webkit-scrollbar {
+    display: none;
+}
+
+.removeButton {
+    padding: 1px 12px;
+    display: inline-block;
+    color: #b71c1c;
+    border: 1px solid #EEEEEE;
+    box-shadow: 2px 2px 0px #EEEEEE;
+    font-size: 18px;
+    border-radius: 100px;
+    margin-bottom: 8px;
+    user-select: none;
+}
+
+.removeButton:hover {
+    background-color: #b71c1c;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.removeButtonCell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

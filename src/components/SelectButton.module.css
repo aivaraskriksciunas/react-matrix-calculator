@@ -1,0 +1,11 @@
+
+.selectButton {
+    margin-right: 15px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.active {
+    border-color: #4A148C;
+    box-shadow: 2px 2px 0 #4A148C;
+}
