@@ -43,7 +43,7 @@ export default class MatrixGridController extends React.Component {
         let value = element.textContent || element.innerText || ""
 
         // If could not parse number value, just keep the current value
-        if ( Number.isNaN( Number( value ) ) ) value = this.state.matrix[row][col]
+        if ( Number.isNaN( Number( value ) ) && value !== '-' ) value = this.state.matrix[row][col]
 
         this.setMatrixState( MatrixModifiers.setElementValue( this.state.matrix, row, col, value ) )
     }
