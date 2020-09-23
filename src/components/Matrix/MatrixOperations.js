@@ -13,44 +13,43 @@ export default class MatrixOperations {
 
     static doOperation( operation, matrixA, matrixB ) {
         let resultMatrix = null
-        let error = null
 
         try {
 
             switch( operation ) {
                 case OP_TRANSPOSE: 
-                    [ resultMatrix, error ] = MatrixOperations.transpose( matrixA )
+                    resultMatrix = MatrixOperations.transpose( matrixA )
                     break;
                 case OP_ADD: 
-                    [ resultMatrix, error ] = MatrixOperations.add( matrixA, matrixB )
+                    resultMatrix = MatrixOperations.add( matrixA, matrixB )
                     break;
                 case OP_SUBTRACT:
-                    [ resultMatrix, error ] = MatrixOperations.subtract( matrixA, matrixB )
+                    resultMatrix = MatrixOperations.subtract( matrixA, matrixB )
                     break;
                 case OP_MULTIPLY: 
-                    [ resultMatrix, error ] = MatrixOperations.multiply( matrixA, matrixB )
+                    resultMatrix = MatrixOperations.multiply( matrixA, matrixB )
                     break;
                 case OP_SQUARE:
-                    [ resultMatrix, error ] = MatrixOperations.multiply( matrixA, matrixA )
+                    resultMatrix = MatrixOperations.multiply( matrixA, matrixA )
                     break;
                 case OP_CUBE:
-                    [ resultMatrix, error ] = MatrixOperations.multiply( MatrixOperations.multiply( matrixA, matrixA )[0], matrixA )
+                    resultMatrix = MatrixOperations.multiply( MatrixOperations.multiply( matrixA, matrixA ), matrixA )
                     break;
                 case OP_DETERMINANT: 
-                    [ resultMatrix, error ] = MatrixOperations.findDeterminant( matrixA )
+                    resultMatrix = MatrixOperations.findDeterminant( matrixA )
                     break;
                 case OP_INVERSE:
-                    [ resultMatrix, error ] = MatrixOperations.findInverse( matrixA )
+                    resultMatrix = MatrixOperations.findInverse( matrixA )
                     break;
                 default:
                     return [ null, "Unimplemented operation" ]
             }
         }
-        catch ( e ) {
-            return [ null, "Error while performing an operation with the provided matrices" ]
+        catch ( error ) {
+            return [ null, error || "Error while performing an operation with the provided matrices" ]
         }
 
-        return [ resultMatrix, error ]
+        return [ resultMatrix, null ]
     }
 
     static transpose( matrix ) {
@@ -62,32 +61,32 @@ export default class MatrixOperations {
             }
         }
 
-        return [ result, null ]
+        return result
     }
 
     static add( a, b ) {
         if ( !areMatricesSameSize( a, b ) ) 
-            return [ null, "Cannot add: matrices are not same size!" ]
+            throw new Error( "Cannot add: matrices are not same size!" )
         
         let result = a.map( ( row, rowIndex ) => 
             row.map( ( el, colIndex ) => el + b[rowIndex][colIndex] ) )
 
-        return [ result, null ]
+        return result 
     }
 
     static subtract( a, b ) {
         if ( !areMatricesSameSize( a, b ) ) 
-            return [ null, "Cannot subtract: matrices are not same size!" ]
+            throw new Error( "Cannot subtract: matrices are not same size!" )
         
         let result = a.map( ( row, rowIndex ) => 
             row.map( ( el, colIndex ) => el - b[rowIndex][colIndex] ) )
 
-        return [ result, null ]
+        return result
     }
 
     static multiply( a, b ) {
         if ( !canMultiplyMatrices( a, b ) ) {
-            return [ null, "Cannot multiply matrices" ]
+            throw new Error( "Cannot multiply matrices" )
         }
 
         let result = createInitialMatrix( getRowCount( a ), getColCount( b ) )
@@ -105,7 +104,7 @@ export default class MatrixOperations {
             }
         }
 
-        return [ result, null ]
+        return result
     }
 
     static multiplyByConst( matrix, number ) {
@@ -116,24 +115,24 @@ export default class MatrixOperations {
 
     static findDeterminant( m ) {
         if ( getColCount( m ) !== getRowCount( m ) ) {
-            return [ null, "Cannot find determinant: matrix is not square" ]
+            throw new Error( "Cannot find determinant: matrix is not square" )
         }
 
         if ( getColCount( m ) === 1 ) {
-            return [ m[0][0], null ]
+            return m[0][0]
         }
         else if ( getColCount( m ) === 2 ) {
-            return [ m[0][0] * m[1][1] - m[0][1] * m[1][0], null ] 
+            return m[0][0] * m[1][1] - m[0][1] * m[1][0]
         }
         
         // Pick the first row of the matrix
         let firstRow = m[0]
         let result = 0
         firstRow.forEach( ( val, col ) => {
-            result += val * Math.pow( -1, col + 1 + 1 ) * MatrixOperations.getMinor( m, 0, col )[0]
+            result += val * Math.pow( -1, col + 1 + 1 ) * MatrixOperations.getMinor( m, 0, col )
         } )
 
-        return [ result, null ]
+        return result
     }
 
     static getMinor( m, rowIndex, colIndex ) {
@@ -150,19 +149,19 @@ export default class MatrixOperations {
 
     static findInverse( m ) {
         if ( getColCount( m ) !== getRowCount( m ) ) {
-            return [ null, "Cannot find the inverse of a non square matrix" ]
+            throw new Error( "Cannot find the inverse of a non square matrix" )
         }
 
-        let determinant = MatrixOperations.findDeterminant( m )[0]
+        let determinant = MatrixOperations.findDeterminant( m )
         let result = createInitialMatrix( getRowCount( m ), getColCount( m ) )
 
         for ( let i = 0; i < getRowCount( m ); i++ ) {
             for ( let j = 0; j < getColCount( m ); j++ ) {
-                result[j][i] = MatrixOperations.getMinor( m, i, j )[0] * m[i][j] * Math.pow( -1, i + j + 2 )
+                result[j][i] = MatrixOperations.getMinor( m, i, j ) * m[i][j] * Math.pow( -1, i + j + 2 )
             }
         }
 
-        return [ MatrixOperations.multiplyByConst( result, 1 / determinant ), null ]
+        return MatrixOperations.multiplyByConst( result, 1 / determinant )
     }
 
 }
