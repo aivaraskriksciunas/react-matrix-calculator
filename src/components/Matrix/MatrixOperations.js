@@ -7,6 +7,7 @@ export const OP_CUBE = "cube"
 export const OP_ADD = "add"
 export const OP_SUBTRACT = "subtract"
 export const OP_MULTIPLY = "multiply"
+export const OP_INVERSE = "inverse"
 
 export default class MatrixOperations {
 
@@ -37,6 +38,9 @@ export default class MatrixOperations {
                     break;
                 case OP_DETERMINANT: 
                     [ resultMatrix, error ] = MatrixOperations.findDeterminant( matrixA )
+                    break;
+                case OP_INVERSE:
+                    [ resultMatrix, error ] = MatrixOperations.findInverse( matrixA )
                     break;
                 default:
                     return [ null, "Unimplemented operation" ]
@@ -106,7 +110,7 @@ export default class MatrixOperations {
 
     static multiplyByConst( matrix, number ) {
         return matrix.map(
-            row => row.map( el => el * number )
+            row => row.map( el => ( el * number ) )
         )
     }
 
@@ -142,6 +146,23 @@ export default class MatrixOperations {
         )
 
         return MatrixOperations.findDeterminant( result )
+    }
+
+    static findInverse( m ) {
+        if ( getColCount( m ) !== getRowCount( m ) ) {
+            return [ null, "Cannot find the inverse of a non square matrix" ]
+        }
+
+        let determinant = MatrixOperations.findDeterminant( m )[0]
+        let result = createInitialMatrix( getRowCount( m ), getColCount( m ) )
+
+        for ( let i = 0; i < getRowCount( m ); i++ ) {
+            for ( let j = 0; j < getColCount( m ); j++ ) {
+                result[j][i] = MatrixOperations.getMinor( m, i, j )[0] * m[i][j] * Math.pow( -1, i + j + 2 )
+            }
+        }
+
+        return [ MatrixOperations.multiplyByConst( result, 1 / determinant ), null ]
     }
 
 }

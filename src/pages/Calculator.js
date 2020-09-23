@@ -10,7 +10,8 @@ import MatrixOperations, {
     OP_CUBE,
     OP_ADD,
     OP_SUBTRACT,
-    OP_MULTIPLY 
+    OP_MULTIPLY,
+    OP_INVERSE
 } from '../components/Matrix/MatrixOperations'
 
 class Calculator extends React.Component {
@@ -77,6 +78,7 @@ class Calculator extends React.Component {
                         <SelectButton onSelect={this.createOpSelectHandler( OP_SQUARE )}>^ 2</SelectButton>
                         <SelectButton onSelect={this.createOpSelectHandler( OP_CUBE )}>^ 3</SelectButton>
                         <SelectButton onSelect={this.createOpSelectHandler( OP_DETERMINANT )}>Find determinant</SelectButton>
+                        <SelectButton onSelect={this.createOpSelectHandler( OP_INVERSE )}>Find inverse matrix</SelectButton>
                     </ButtonRow>
 
                     <ButtonRow title="Arithmetic operations">
