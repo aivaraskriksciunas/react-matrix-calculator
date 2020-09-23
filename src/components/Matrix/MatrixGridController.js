@@ -42,15 +42,12 @@ export default class MatrixGridController extends React.Component {
 
         let value = element.textContent || element.innerText || ""
 
-        // If could not parse number value, just keep the current value
-        if ( Number.isNaN( Number( value ) ) && value !== '-' ) value = this.state.matrix[row][col]
-
         this.setMatrixState( MatrixModifiers.setElementValue( this.state.matrix, row, col, value ) )
     }
 
     // Converts a given matrix value into a Number
     parseMatrixValue = ( row, col ) => this.setMatrixState(
-        MatrixModifiers.setElementValue( this.state.matrix, row, col, Number( this.state.matrix[row][col] ) )
+        MatrixModifiers.setElementValue( this.state.matrix, row, col, Number( this.state.matrix[row][col] ) || 0 )
     )
 
     expandMatrixCols = () => this.setMatrixState( MatrixModifiers.addColumn( this.state.matrix ) )
