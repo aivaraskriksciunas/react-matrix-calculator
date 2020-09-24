@@ -90,9 +90,44 @@ class Calculator extends React.Component {
                 </div>
 
 
-                <ResultContainer matrix={this.state.resultMatrix} error={this.state.calculationError}></ResultContainer>
+                {/* <ResultContainer matrix={this.state.resultMatrix} error={this.state.calculationError}></ResultContainer> */}
+                {this.createResultContainer()}
             </div>
         )
+    }
+
+
+    createResultContainer() {
+        const matrix = typeof( this.state.resultMatrix ) == "number" ? 
+            [[ this.state.resultMatrix ]] : this.state.resultMatrix
+        const error = this.state.calculationError
+
+        if ( error ) {
+            return (
+                <div className='container boxContainer' style={{ borderTop: '5px solid #b71c1c'}}>
+                    <div className='font-2xl mb-4'>Result</div>
+                    {error.toString()}
+                </div>
+            )
+        }
+        else if ( matrix ) {
+            return (
+                <div className='container boxContainer' style={{ borderTop: '5px solid #009688'}}>
+                    <div className='font-2xl mb-4'>Result</div>
+                    <MatrixGridController 
+                        matrix={matrix} 
+                        readonly>
+                    </MatrixGridController>
+
+                    <ButtonRow>
+                        <SelectButton onSelect={() => this.setState({ matrixA: matrix })}>Set as Matrix A</SelectButton>
+                        <SelectButton onSelect={() => this.setState({ matrixB: matrix })}>Set as Matrix B</SelectButton>
+                    </ButtonRow>
+                </div>
+            )
+        }
+    
+        return null;
     }
 
 }
@@ -108,32 +143,6 @@ function ButtonRow({ title, children }) {
             </div>
         </>
     )
-}
-
-function ResultContainer({ matrix, error }) {
-
-    if ( error ) {
-        return (
-            <div className='container boxContainer' style={{ borderTop: '5px solid #b71c1c'}}>
-                <div className='font-2xl mb-4'>Result</div>
-                {error.toString()}
-            </div>
-        )
-    }
-    else if ( matrix ) {
-        return (
-            <div className='container boxContainer' style={{ borderTop: '5px solid #009688'}}>
-                <div className='font-2xl mb-4'>Result</div>
-                <MatrixGridController 
-                    matrix={typeof( matrix ) == "number" ? [[ matrix ]] : matrix} 
-                    readonly>
-                </MatrixGridController>
-            </div>
-        )
-    }
-
-    return null;
-
 }
 
 export default Calculator;
