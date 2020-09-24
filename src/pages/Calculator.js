@@ -120,8 +120,9 @@ class Calculator extends React.Component {
                     </MatrixGridController>
 
                     <ButtonRow>
-                        <SelectButton onSelect={() => this.setState({ matrixA: matrix })}>Set as Matrix A</SelectButton>
-                        <SelectButton onSelect={() => this.setState({ matrixB: matrix })}>Set as Matrix B</SelectButton>
+                        {/* When setting matrix, we need to copy it first */}
+                        <SelectButton onSelect={() => this.setState({ matrixA: [...matrix] })}>Set as Matrix A</SelectButton>
+                        <SelectButton onSelect={() => this.setState({ matrixB: [...matrix] })}>Set as Matrix B</SelectButton>
                     </ButtonRow>
                 </div>
             )
