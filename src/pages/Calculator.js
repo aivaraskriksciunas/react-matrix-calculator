@@ -116,7 +116,7 @@ function ResultContainer({ matrix, error }) {
         return (
             <div className='container boxContainer' style={{ borderTop: '5px solid #b71c1c'}}>
                 <div className='font-2xl mb-4'>Result</div>
-                {error}
+                {error.toString()}
             </div>
         )
     }
