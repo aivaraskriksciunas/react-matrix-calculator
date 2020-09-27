@@ -1,14 +1,18 @@
 import React from 'react';
 import './App.css';
 
-import Calculator from './pages/Calculator';
+import { BrowserRouter } from 'react-router-dom' 
+import Router from './ApplicationRouter'
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
 
     return (
-        <>
-            <div className='content'>
-                <Calculator></Calculator>
+        <BrowserRouter>
+            <Navbar/>
+
+            <div className='content' style={{paddingTop: '30px'}}>
+                <Router/>
             </div>
             
             <div className='footer'>
@@ -16,7 +20,7 @@ function App() {
                     Aivaras Kriksciunas, 2020
                 </div>
             </div>
-        </>
+        </BrowserRouter>
     )
 
 }

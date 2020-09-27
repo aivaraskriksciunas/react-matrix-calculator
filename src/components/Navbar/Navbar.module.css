@@ -1,0 +1,23 @@
+#navbar {
+}
+
+#navbarTitle {
+    font-weight: 300;
+    font-size: 1.1em;
+    flex: 1;
+}
+
+.navbarLink {
+    font-weight: 400;
+    font-size: 1em;
+    margin-left: 15px;
+    padding: 5px 8px;
+    color: #37474F;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.navbarLink:hover {
+    cursor: pointer;
+    background-color: #CFD8DC;
+}
