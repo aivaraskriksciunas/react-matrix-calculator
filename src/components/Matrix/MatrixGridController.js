@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Matrix.module.css'
 import ContentEditable from 'react-contenteditable'
-import MatrixModifiers, { createInitialMatrix, matrixCanExpandCols, matrixCanExpandRows } from './MatrixModifers'
+import MatrixModifiers, { createInitialMatrix, matrixCanExpandCols, matrixCanExpandRows } from '../../lib/MatrixModifers'
 import isEqual from 'lodash/isEqual'
 
 export default class MatrixGridController extends React.Component {

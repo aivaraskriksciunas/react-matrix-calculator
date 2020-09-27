@@ -2,7 +2,7 @@ import React from 'react';
 
 import MatrixGridController from '../components/Matrix/MatrixGridController'
 import SelectButton from '../components/SelectButton'
-import { createInitialMatrix } from '../components/Matrix/MatrixModifers'
+import { createInitialMatrix } from '../lib/MatrixModifers'
 import MatrixOperations, {
     OP_TRANSPOSE,
     OP_DETERMINANT,
@@ -12,7 +12,7 @@ import MatrixOperations, {
     OP_SUBTRACT,
     OP_MULTIPLY,
     OP_INVERSE
-} from '../components/Matrix/MatrixOperations'
+} from '../lib/MatrixOperations'
 
 class Calculator extends React.Component {
 
@@ -52,7 +52,7 @@ class Calculator extends React.Component {
 
     render() {
         return (
-            <div style={{ padding: '40px 0' }}>
+            <div>
                 <div className='container boxContainer'>
                     <div className='sm:justify-center items-start  flex flex-wrap'>
                         <div className='pr-8 mb-8' style={{ flex: 1 }}>
