@@ -1,16 +1,27 @@
 import React, { useState } from 'react'
-import { interpretExpression } from '../lib/ExpressionInterpreter'
+// import { getOperands, interpretExpression } from '../lib/ExpressionInterpreter'
+import { createExpressionTree } from '../lib/ExpressionInterpreter'
+import { treeToPrefix, treeToPostfix } from '../lib/ExpressionTreeConverters'
 
 export default function LogicPage() {
 
     const [ rawExpression, setRawExpression ] = useState( '' )
     const [ showInstruction, setShowInstruction ] = useState( true )
-    const [ postfixExpression, setPostfixExpression ] = useState( '' )
+    const [ expressionTranslations, setExpressionTranslations ] = useState({ postfix: '', prefix: '' })
 
     const calculate = () => {
-        let expr = interpretExpression( rawExpression )
-        setPostfixExpression( expr.join( ' ' ) )
+        let expr = createExpressionTree( rawExpression )
+        console.log( expr.tree )
+        console.log( expr.operands )
+
+        setExpressionTranslations({
+            prefix: treeToPrefix( expr.tree ),
+            postfix: treeToPostfix( expr.tree )
+        })
         setShowInstruction( false ) 
+
+        // let operands = getOperands( expr )
+        // console.log( operands )
     }
 
     const showResults = () => {
@@ -20,8 +31,11 @@ export default function LogicPage() {
 
         return (
             <div>
-                <div className='text-lg my-3'>
-                    Expression in postfix: {postfixExpression}
+                <div className='text-lg mt-3'>
+                    Expression in prefix: {expressionTranslations.prefix}
+                </div>
+                <div className='text-lg mb-3'>
+                    Expression in postfix: {expressionTranslations.postfix}
                 </div>
             </div>
         )
