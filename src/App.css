@@ -4,6 +4,9 @@
     box-shadow: 2px 2px 0 #9E9E9E;
     border-radius: 0;
     padding: 0.5rem 0.8rem;
+    display: flex;
+    align-items: center;
+    user-select: none;
 }
 
 .button.light {
@@ -14,6 +17,7 @@
 .button:hover {
     border: 1px solid #00695C;
     box-shadow: 3px 3px 0 #00695C;
+    cursor: pointer;
 }
 
 .button:active {
@@ -31,4 +35,16 @@
     border-radius: 5px;
     padding: 2rem;
     margin-bottom: 2rem;
+}
+
+.textInput {
+    border: 1px solid #9E9E9E;
+    box-shadow: 2px 2px 0 #9E9E9E;
+    border-radius: 0;
+    padding: 0.5rem 0.8rem;
+}
+
+.textInput:hover, .textInput:focus  {
+    border: 1px solid #00695C;
+    box-shadow: 3px 3px 0 #00695C;
 }
