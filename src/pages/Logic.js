@@ -1,18 +1,25 @@
 import React, { useState } from 'react'
-// import { getOperands, interpretExpression } from '../lib/ExpressionInterpreter'
 import { createExpressionTree } from '../lib/ExpressionInterpreter'
 import { treeToPrefix, treeToPostfix } from '../lib/ExpressionTreeConverters'
+import BooleanResult from '../components/BooleanCalculation/Result'
 
 export default function LogicPage() {
 
     const [ rawExpression, setRawExpression ] = useState( '' )
     const [ showInstruction, setShowInstruction ] = useState( true )
     const [ expressionTranslations, setExpressionTranslations ] = useState({ postfix: '', prefix: '' })
+    const [ interpretation, setInterpretation ] = useState({
+        tree: [],
+        operands: []
+    })
 
     const calculate = () => {
         let expr = createExpressionTree( rawExpression )
-        console.log( expr.tree )
-        console.log( expr.operands )
+
+        setInterpretation({
+            tree: expr.tree,
+            operands: expr.operands
+        })
 
         setExpressionTranslations({
             prefix: treeToPrefix( expr.tree ),
@@ -37,6 +44,8 @@ export default function LogicPage() {
                 <div className='text-lg mb-3'>
                     Expression in postfix: {expressionTranslations.postfix}
                 </div>
+
+                <BooleanResult tree={interpretation.tree} operands={interpretation.operands}></BooleanResult>
             </div>
         )
     }
