@@ -48,3 +48,16 @@
     border: 1px solid #00695C;
     box-shadow: 3px 3px 0 #00695C;
 }
+
+.highlight {
+    background-color: #C5CAE9;
+    color: #1A237E;
+    font-size: 13px;
+    border-radius: 2px;
+    padding: 3px 5px;
+    font-weight: bold;
+}
+
+p {
+    line-height: 1.3rem;
+}

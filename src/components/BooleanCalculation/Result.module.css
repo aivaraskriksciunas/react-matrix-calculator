@@ -1,0 +1,28 @@
+.table {
+    border: 1px solid #C5CAE9;
+    box-shadow: 2px 2px 0 #C5CAE9;
+}
+
+.headerRow {
+    background-color: #E8EAF6;
+}
+
+.headerCell {
+    padding: 8px 8px;
+    font-weight: 400;
+}
+
+.dataRow {
+    border-bottom: 1px solid #E8EAF6;
+}
+
+.dataRow:hover {
+    background-color: #F5F5F5;
+}
+
+.dataCell {
+    padding: 4px 10px;
+    font-weight: 200;
+    text-align: center;
+    border-left: 1px dashed #BDBDBD;
+}

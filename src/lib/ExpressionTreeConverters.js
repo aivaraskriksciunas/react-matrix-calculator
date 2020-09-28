@@ -1,9 +1,9 @@
 export function treeToPrefix( tree ) {
-    return getPrefixStr( tree[0] )
+    return getPrefixStr( tree )
 } 
 
 export function treeToPostfix( tree ) {
-    return getPostfixStr( tree[0] )
+    return getPostfixStr( tree )
 }
 
 function getPrefixStr( node ) {
